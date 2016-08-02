@@ -1,0 +1,37 @@
+# web application files
+/web-app/WEB-INF/classes
+
+# project release file
+/*.war
+
+# older plugin install locations
+/plugins
+/web-app/plugins
+
+# "temporary" build files
+/target
+### Gradle template
+.gradle
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+.gradle/
+.lazybones/
+build/
+.slcache/
+target/
+bower-grails-asset-pipeline/.idea/
+bower-grails-asset-pipeline/wrapper/
+bower-grails-asset-pipeline/target/
+demo/.slcache/
+demo/wrapper/
+.idea/
+out/
+*.iml
+*.ipr
+*.iws
