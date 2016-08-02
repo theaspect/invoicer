@@ -23,6 +23,7 @@ gradle-app.setting
 .gradle/
 .lazybones/
 build/
+config/
 .slcache/
 target/
 bower-grails-asset-pipeline/.idea/
