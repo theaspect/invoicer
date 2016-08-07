@@ -6,5 +6,6 @@ import griffon.metadata.ArtifactProviderFor
 
 @ArtifactProviderFor(GriffonModel)
 class InvoicerModel {
-    @FXObservable String clickCount = "0"
+    @FXObservable String input  = ''
+    @FXObservable String output = ''
 }

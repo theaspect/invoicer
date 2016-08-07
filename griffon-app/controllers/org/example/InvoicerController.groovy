@@ -2,15 +2,18 @@ package org.example
 
 import griffon.core.artifact.GriffonController
 import griffon.metadata.ArtifactProviderFor
-import griffon.transform.Threading
+
+import javax.inject.Inject
 
 @ArtifactProviderFor(GriffonController)
 class InvoicerController {
     InvoicerModel model
 
-    @Threading(Threading.Policy.INSIDE_UITHREAD_ASYNC)
-    void click() {
-        int count = model.clickCount.toInteger()
-        model.clickCount = String.valueOf(count + 1)
+    @Inject
+    private InvoicerService sampleService
+
+    void sayHello() {
+        String result = sampleService.sayHello(model.input)
+        runInsideUIAsync { model.output = result }
     }
 }

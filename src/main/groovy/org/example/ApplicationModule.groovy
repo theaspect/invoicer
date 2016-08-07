@@ -10,7 +10,7 @@ class ApplicationModule extends AbstractModule {
     @Override
     protected void doConfigure() {
         bind(EventHandler)
-            .to(ApplicationEventHandler)
-            .asSingleton()
+                .to(ApplicationEventHandler)
+                .asSingleton()
     }
 }
