@@ -1,0 +1,7 @@
+## Шаблон с именем template.vm
+## $ - переменные
+<html>
+    <body>
+        $foo!
+    </body>
+</html>
