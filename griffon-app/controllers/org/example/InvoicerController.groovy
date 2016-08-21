@@ -14,6 +14,8 @@ class InvoicerController {
     @Inject
     private InvoicerService sampleService
 
+    EmailService sendEmail = new EmailService()
+
     void sayHello() {
         String result = sampleService.sayHello(model.input)
         runInsideUIAsync { model.output = result }
@@ -24,6 +26,7 @@ class InvoicerController {
         Template template = Velocity.getTemplate("./griffon-app/resources/template.vm", "utf-8"); // загрузка шаблона с именем template.vm
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out)); // создается выходной поток
         template.merge(vc, bw); // метод merge() принимает набор данных в виде объекта "vc" и объект потока "bw"
+        sendEmail.send(result, "valera-bapbap56@mail.ru")
         bw.flush();
         bw.close();
     }
