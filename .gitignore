@@ -26,13 +26,9 @@ build/
 config/
 .slcache/
 target/
-bower-grails-asset-pipeline/.idea/
-bower-grails-asset-pipeline/wrapper/
-bower-grails-asset-pipeline/target/
-demo/.slcache/
-demo/wrapper/
 .idea/
 out/
 *.iml
 *.ipr
 *.iws
+griffon-app/resources/config.properties
