@@ -9,8 +9,8 @@ class EmailService {
     public static void send(String message, String receiverMail){
 
         Properties properties = new Properties();
-        InputStream input = new FileInputStream("./griffon-app/resources/config.properties")
-        properties.load(input)
+        InputStream mailSend = new FileInputStream("./griffon-app/resources/config.properties")
+        properties.load(mailSend)
 
         Email email = new SimpleEmail();
         email.setHostName("smtp.googlemail.com");

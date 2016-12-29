@@ -36,11 +36,3 @@ Simply add your source files to `src/main/groovy`, your test cases to
     gradle run
 
 Don't forget to add any extra JAR dependencies to `build.gradle`!
-
-If you prefer building with Maven then execute the following commands
-
-    mvn compile
-    mvn test
-    mvn -Prun
-
-Don't forget to add any extra JAR dependencies to `pom.xml`!
