@@ -74,6 +74,11 @@ dependencies {
     testCompile "org.spockframework:spock-core:${spockVersion}"
 
     functionalTestCompile "org.codehaus.griffon:griffon-javafx-test:${griffon.version}"
+
+    compile group: 'com.github.detro.ghostdriver', name: 'phantomjsdriver', version: '1.1.0'
+    compile group: 'com.github.igor-suhorukov', name: 'phantomjs-runner', version: '1.1'
+
+
 }
 
 

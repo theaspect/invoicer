@@ -8,20 +8,20 @@ class EmailService {
 
     public static void send(String message, String receiverMail){
 
-        Properties properties = new Properties();
+        Properties properties = new Properties()
         InputStream mailSend = new FileInputStream("./griffon-app/resources/config.properties")
         properties.load(mailSend)
 
-        Email email = new SimpleEmail();
-        email.setHostName("smtp.googlemail.com");
-        email.setSmtpPort(465);
-        email.setAuthenticator(new DefaultAuthenticator(properties.getProperty("senderMail"), properties.getProperty("password")));
-        email.setSSLOnConnect(true);
-        email.setFrom("user@gmail.com");
-        email.setSubject("TestMail");
-        email.setMsg(message);
-        email.addTo(receiverMail);
-        email.send();
-        println("the letter is sent")
+        Email email = new SimpleEmail()
+        email.setHostName("smtp.googlemail.com")
+        email.setSmtpPort(465)
+        email.setAuthenticator(new DefaultAuthenticator(properties.getProperty("senderMail"), properties.getProperty("password")))
+        email.setSSLOnConnect(true)
+        email.setFrom("user@gmail.com")
+        email.setSubject("TestMail")
+        email.setMsg(message)
+        email.addTo(receiverMail)
+        email.send()
+        println("The letter is sent")
     }
 }
