@@ -7,12 +7,16 @@ import org.apache.commons.validator.routines.EmailValidator
 import org.apache.velocity.Template
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.app.Velocity
-import org.webbitserver.handler.StaticFileHandler
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Logger
 
 import javax.inject.Inject
 
 @ArtifactProviderFor(GriffonController)
 class InvoicerController {
+
+    Logger logger = LogManager.getLogger(this.class)
+
     InvoicerModel model
 
     @Inject
@@ -23,34 +27,50 @@ class InvoicerController {
 
     void sayHello() {
 
+        Properties properties = new Properties()
+        InputStream mailSend = new FileInputStream("./config.properties")
+        properties.load(mailSend)
+
         String result = sampleService.sayHello(model.input)
 
         runInsideUIAsync {
             model.output = result
         }
 
+        String tempFile = "tempFile.html"
+        String receiver = properties.getProperty("receiver")
+        String loadTemplate = properties.getProperty("tamplate")
+        File toPdf = new File(properties.getProperty("saveToPdfPath"))
+        File file = new File(tempFile)
+
         Velocity.init()
         VelocityContext vc = new VelocityContext()
         vc.put("foo", result)
-        Template template = Velocity.getTemplate("./griffon-app/resources/template.vm", "utf-8")
-        File file = new File("test.html")
+        Template template = Velocity.getTemplate(loadTemplate, "utf-8")
+
         BufferedWriter bw = new BufferedWriter(new FileWriter(file))
         template.merge(vc, bw)
 
-        /*phantomJsService.render(binary(),"./griffon-app/resources/rasterize.js",
-                "./griffon-app/resources/template.html", "D:/test.pdf")
-
-        EmailValidator validator = EmailValidator.getInstance()
-        if (validator.isValid("valera-bapbap56@mail.ru")) {
-            sendEmail.send(result, "valera-bapbap56@mail.ru", "D:/test.pdf", "./config.properties")
-        }*/
-
         bw.flush()
         bw.close()
+
+        logger.info("Render file start")
+        phantomJsService.render(binary(), "./griffon-app/resources/rasterize.js", file.canonicalPath, toPdf.canonicalPath)
+        logger.info("Render file end")
+
+        EmailValidator validator = EmailValidator.getInstance()
+        logger.info("Send mail start")
+        if (validator.isValid(receiver)) {
+            sendEmail.send(result, receiver, toPdf.canonicalPath, properties)
+        }
+        logger.info("Send mail end")
+
         file.deleteOnExit()
     }
 
-    String binary(){
+    String binary() {
+
+        logger.info("OS detection")
         String binaryFile = "./griffon-app/resources/"
 
         if (OS.familyWindows) {
@@ -66,6 +86,6 @@ class InvoicerController {
                 binaryFile += "phantomjs_lin32"
             }
         }
-        return  binaryFile
+        return binaryFile
     }
 }

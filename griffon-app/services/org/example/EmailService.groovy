@@ -6,15 +6,10 @@ import org.apache.commons.mail.MultiPartEmail
 
 class EmailService {
 
-    static void send(String message, String receiverMail, String fileName, String configProperties){
+    static void send(String message, String receiverMail, String fileName, Properties properties){
 
-        Properties properties = new Properties()
-        InputStream mailSend = new FileInputStream(configProperties)
-        properties.load(mailSend)
-
-        EmailAttachment attachment = new EmailAttachment();
+        EmailAttachment attachment = new EmailAttachment()
         attachment.setPath(fileName)
-
         MultiPartEmail email = new MultiPartEmail()
         email.setHostName(properties.getProperty("hostName"))
         email.setSmtpPort(properties.getProperty("smtpPort") as int)
@@ -24,7 +19,6 @@ class EmailService {
         email.setSubject(properties.getProperty("subject"))
         email.setMsg(message)
         email.addTo(receiverMail)
-
         email.attach(attachment)
         email.send()
     }
