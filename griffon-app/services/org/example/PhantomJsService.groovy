@@ -1,27 +1,20 @@
 package org.example
 
-import org.apache.commons.io.FileUtils
-import org.openqa.selenium.OutputType
-import org.openqa.selenium.TakesScreenshot
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.phantomjs.PhantomJSDriver
-import org.openqa.selenium.phantomjs.PhantomJSDriverService
-import org.openqa.selenium.remote.DesiredCapabilities
+import org.codehaus.plexus.util.cli.shell.CmdShell
 
-class PhantomJsService {
-    static void main(String[] args) {
-        DesiredCapabilities caps = new DesiredCapabilities()
-        caps.setJavascriptEnabled(true)
-        caps.setCapability("takesScreenshot", true)
-        caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "D:/phantomjs-2.1.1-windows/bin/phantomjs.exe")
+class PhantomJsService extends CmdShell {
+    static void render(String binaryPath, String jsPath, String htmlFilePath, String saveToPdfPath) {
 
-        WebDriver driver = new PhantomJSDriver(caps)
-        driver.get("./griffon-app/resources/test.html")
-        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        System.out.println("File:" + srcFile)
-        FileUtils.copyFile(srcFile, new File("D:/screenshot_.pdf"))
-        System.out.println("Done")
+        File binary = new File(binaryPath)
+        File js = new File(jsPath)
+        File htmlAdress = new File(htmlFilePath)
+        File savePdf = new File(saveToPdfPath)
 
-        driver.quit()
+        String cmd = "\"${binary.canonicalPath}\" \"${js.canonicalPath}\" " +
+                "\"file:///${htmlAdress.canonicalPath}\" \"${savePdf.canonicalPath}\""
+
+        def proc = cmd.execute()
+        proc.waitForProcessOutput()
     }
+
 }

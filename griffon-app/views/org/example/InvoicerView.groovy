@@ -26,11 +26,10 @@ class InvoicerView {
                 }
                 pane(layoutX: 400.0, prefHeight: 80.0, prefWidth: 384.0) {
                     label(layoutX: 14.0, layoutY: 14.0, text: ms.getMessage('greeting.demo'))
+                    textArea(layoutX: 14.0, layoutY: 34.0, prefHeight: 80.0, prefWidth: 350.0)
 
                 }
             }
         }
-
-
     }
 }
