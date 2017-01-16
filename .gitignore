@@ -32,3 +32,4 @@ out/
 *.ipr
 *.iws
 griffon-app/resources/config.properties
+config.properties

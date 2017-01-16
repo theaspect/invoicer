@@ -13,8 +13,8 @@ class InvoicerView {
         MessageSource ms = application.messageSource
         builder.application(title: ms.getMessage('application.title'),
                 sizeToScene: true, centerOnScreen: true, name: 'mainWindow') {
-            scene(fill: WHITE, width: 400, height: 120) {
-                anchorPane(prefHeight: 80.0, prefWidth: 384.0) {
+            scene(fill: WHITE, width: 800, height: 600) {
+                pane(prefHeight: 80.0, prefWidth: 384.0) {
                     label(layoutX: 14.0, layoutY: 14.0, text: ms.getMessage('greeting.label'))
                     textField(layoutX: 172.0, layoutY: 11.0, prefWidth: 200.0,
                             text: bind(model.inputProperty()))
@@ -22,6 +22,12 @@ class InvoicerView {
                             sayHelloAction)
                     label(layoutX: 14.0, layoutY: 80.0, prefWidth: 360.0,
                             text: bind(model.outputProperty()))
+
+                }
+                pane(layoutX: 400.0, prefHeight: 80.0, prefWidth: 384.0) {
+                    label(layoutX: 14.0, layoutY: 14.0, text: ms.getMessage('greeting.demo'))
+                    textArea(layoutX: 14.0, layoutY: 34.0, prefHeight: 80.0, prefWidth: 350.0)
+
                 }
             }
         }

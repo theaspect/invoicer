@@ -67,13 +67,21 @@ dependencies {
 
     compile group: 'org.apache.velocity', name: 'velocity', version: '1.7'
     compile group: 'org.apache.commons', name: 'commons-email', version: '1.4'
-
+    compile group: 'commons-validator', name: 'commons-validator', version: '1.5.1'
 
     testCompile "org.codehaus.griffon:griffon-javafx-test:${griffon.version}"
     testCompile "org.codehaus.groovy:groovy-all:${groovyVersion}"
     testCompile "org.spockframework:spock-core:${spockVersion}"
 
     functionalTestCompile "org.codehaus.griffon:griffon-javafx-test:${griffon.version}"
+
+    compile group: 'com.github.detro.ghostdriver', name: 'phantomjsdriver', version: '1.1.0'
+    compile group: 'com.github.igor-suhorukov', name: 'phantomjs-runner', version: '1.1'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.5'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5'
+
+
 }
 
 
